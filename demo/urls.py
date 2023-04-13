@@ -16,11 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from core.views import FileAPIView, FileIdRequest
+from core.views import FileAPIView, FileIdRequestView, FileRequestView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/file/<uuid:id>/',FileIdRequest.as_view()),
-    path('api/v1/file/', FileAPIView.as_view()),
+    path('api/v1/file/<uuid:id>/',FileIdRequestView.as_view()),
+    path('api/v1/file/', FileRequestView.as_view()),
     
 ]
+

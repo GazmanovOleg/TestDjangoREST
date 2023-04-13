@@ -4,13 +4,17 @@ from .models import File
 class FileSerializer(serializers.ModelSerializer):
     class Meta:
         model = File
-        fields = ('id', 'filename', )
+        fields = ('id', 'filename','video' )
 
 
 
 
-class FileIdRequestSerializer(serializers.Serializer):
-    id = id,
-    filename = serializers.CharField(),
-    processing = serializers.BooleanField(),
-    processingSuccess = serializers.BooleanField()
+class FileIdRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = File
+        fields = ('id','filename','processing','processingSuccess','video' )
+
+class FileRequestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = File
+        fields = ('id',)

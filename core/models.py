@@ -8,13 +8,13 @@ def width_or_height_vaildator(value):
         raise ValidationError(f'Число {value} невалидно.')
 class File(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False )
-    filename = models.CharField(max_length=255)
+    filename = models.CharField(max_length=255, default='string')
     video = models.FileField(upload_to='videos_uploaded', null=True,
                              validators=[FileExtensionValidator( allowed_extensions=['mp4'])])
-    processing = models.BooleanField()
+    processing = models.BooleanField(null = True)
     processingSuccess = models.BooleanField(null=True)
-    width = models.IntegerField(validators=[width_or_height_vaildator])
-    height = models.IntegerField(validators=[width_or_height_vaildator])
+    width = models.IntegerField(validators=[width_or_height_vaildator], blank=True, default=22)
+    height = models.IntegerField(validators=[width_or_height_vaildator], blank=True, default=22)
 
     def __str__(self):
         return self.filename

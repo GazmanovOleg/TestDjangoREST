@@ -11,8 +11,14 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import os
+import re
+
+
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -38,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
+    
     'rest_framework',
 ]
 
@@ -123,3 +130,30 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#MEDIA_URL = '/media/'
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_BROKER_TRANSPORT_OPTION = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = f"redis://:127.0.0.1:6379/0"
+
+CELERY_TIMEZONE = "Russia/Mocow"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+REDIS_HOST = 'localhost' 
+REDIS_PORT = '6379' 
+BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0' 
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600} 
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.pubsub.RedisPubSubChannelLayer",
+#         "CONFIG": {
+#             # "hosts": [("127.0.0.1", 6379)], # for dev
+#             "hosts": [f"redis://:{env('REDIS_PASS')}@{env('REDIS_HOST')}:6379/0"],  # for docker
+#         },
+#     },
+# }
