@@ -1,11 +1,6 @@
 from .models import File
 import os
-from celery import shared_task
-import random
-import string
 from demo.celery import app
-from .logs import logger
-from . serializers import FileVideoSerializer
 
 def get_random_string(string_len = 6):
     return ''.join(string.ascii_lowercase[random.randint(0,len(string.ascii_lowercase))] for _ in range(string_len))

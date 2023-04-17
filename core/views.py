@@ -1,10 +1,7 @@
-from django.forms import model_to_dict
 from rest_framework import generics
-from .logs import logger
 from .tasks import change_video_extension
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.shortcuts import render
 from .models import File
 from .serializers import FileSerializer, FileIdRequestSerializer, FileRequestSerializer, FileVideoSerializer
 import string
